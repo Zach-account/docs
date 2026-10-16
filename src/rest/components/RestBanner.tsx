@@ -72,21 +72,19 @@ export const RestBanner = () => {
   }
   // Temporary banner for REST API Versioning
   if (isRestPage && bannerText !== '') {
+    const apiVersionInfoText = t('rest.banner.api_version_info').replace(
+      /{{\s*versionWithApiVersion\s*}}/,
+      versionWithApiVersion === DEFAULT_VERSION ? '' : `/${versionWithApiVersion}`,
+    )
+
     return (
       <div
         data-testid="rest-api-versioning-temporary-banner"
         className="container-xl mt-3 mx-auto p-responsive"
       >
         <Flash>
-          <span dangerouslySetInnerHTML={{ __html: bannerText }} />{' '}
-          <span
-            dangerouslySetInnerHTML={{
-              __html: t('rest.banner.api_version_info').replace(
-                /{{\s*versionWithApiVersion\s*}}/,
-                versionWithApiVersion === DEFAULT_VERSION ? '' : `/${versionWithApiVersion}`,
-              ),
-            }}
-          />
+          <span>{bannerText}</span>{' '}
+          <span>{apiVersionInfoText}</span>
         </Flash>
       </div>
     )
